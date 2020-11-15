@@ -11,7 +11,10 @@ from loguru import logger
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv("SECRET_KEY", default=secrets.token_urlsafe(64))
+SECRET_KEY = os.getenv("SECRET_KEY", default=None)
+if not SECRET_KEY:
+    SECRET_KEY = secrets.token_urlsafe(64)
+    logger.warning("SECRET_KEY don't don't set. it will be one time generated. Please set it in production!")
 
 DEBUG = bool(int(os.getenv("DEBUG", default=1)))
 

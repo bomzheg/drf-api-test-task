@@ -1,9 +1,12 @@
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
 
 from . import views
 
 app_name = 'pools'
 
-urlpatterns = [
-    url(r'pools/', views.PoolsView.as_view(), name='pools'),
-]
+router = DefaultRouter()
+router.register('pools', views.PoolsView)
+router.register('question', views.QuestionsView)
+router.register('answer', views.AnswersView)
+
+urlpatterns = router.urls

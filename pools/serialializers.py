@@ -1,11 +1,12 @@
 from rest_framework import serializers
-from .models import Poll, Question, Answer
+from pools.models import Poll, Question, Answer
 
 
 class PoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
-        fields = ("name", "welcome_text", "final_text")
+        exclude = tuple()
+        read_only_fields = ['date_start']
 
 
 class QuestionSerializer(serializers.ModelSerializer):

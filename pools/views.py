@@ -1,24 +1,19 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
-from .models import Poll
-from .serialializers import PoolSerializer
-
-
-def index(request):
-    return Response("Hello, World!")
+from .models import Poll, Question, Answer
+from .serialializers import PoolSerializer, QuestionSerializer, AnswerSerializer
 
 
-class PoolsView(APIView):
-    def get(self, request):
-        pools = Poll.objects.all()
-        serializer = PoolSerializer(pools, many=True)
-        return Response({'pools': serializer.data})
+class PoolsView(viewsets.ModelViewSet):
+    queryset = Poll.objects.all()
+    serializer_class = PoolSerializer
 
-    def post(self, request):
-        pool = request.data.get("pool")
-        serializer = PoolSerializer(data=pool)
-        if serializer.is_valid():
-            pool_saved = serializer.save()
-            return Response({'success': True, "pool": PoolSerializer(pool_saved).data})
-        return Response(status=400)
+
+class QuestionsView(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+
+class AnswersView(viewsets.ModelViewSet):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer

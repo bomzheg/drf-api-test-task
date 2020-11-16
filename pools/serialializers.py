@@ -6,6 +6,7 @@ class PoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
         exclude = tuple()
+        read_only_fields = ['date_start']
 
 
 class QuestionSerializer(serializers.ModelSerializer):

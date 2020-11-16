@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 
-from pools.models import Poll
 from pools.serialializers import PoolSerializer, QuestionSerializer, AnswerSerializer
 from pools.services.pools import get_active_pools, get_active_question, get_answers_for_active_question
 

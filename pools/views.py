@@ -1,19 +1,20 @@
 from rest_framework import viewsets
 
-from .models import Poll, Question, Answer
-from .serialializers import PoolSerializer, QuestionSerializer, AnswerSerializer
+from pools.models import Poll
+from pools.serialializers import PoolSerializer, QuestionSerializer, AnswerSerializer
+from pools.services.pools import get_active_pools, get_active_question, get_answers_for_active_question
 
 
 class PoolsView(viewsets.ModelViewSet):
-    queryset = Poll.objects.all()
+    queryset = get_active_pools()
     serializer_class = PoolSerializer
 
 
 class QuestionsView(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
+    queryset = get_active_question()
     serializer_class = QuestionSerializer
 
 
 class AnswersView(viewsets.ModelViewSet):
-    queryset = Answer.objects.all()
+    queryset = get_answers_for_active_question()
     serializer_class = AnswerSerializer

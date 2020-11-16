@@ -39,7 +39,8 @@ class Poll(models.Model):
 
     @property
     def is_active(self):
-        return self.date_start < datetime.utcnow().date() < self.date_finish
+        # noinspection PyTypeChecker
+        return self.date_start <= datetime.utcnow().date() <= self.date_finish
 
 
 class Question(models.Model):
@@ -66,7 +67,9 @@ class Answer(models.Model):
         return self.answer_text
 
 
+# noinspection PyUnusedLocal
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
+        # noinspection PyUnresolvedReferences
         Token.objects.create(user=instance)

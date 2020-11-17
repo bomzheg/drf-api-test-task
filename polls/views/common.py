@@ -1,3 +1,6 @@
+from loguru import logger
+
+
 class ParentIDMixin:
     parent_field = ''
     model = None
@@ -7,5 +10,5 @@ class ParentIDMixin:
         return queryset
 
     def _get_filter_key(self):
-        parent_id = self.kwargs.get(self.parent_field)
+        parent_id = self.request.get(self.parent_field)
         return {self.parent_field: parent_id}

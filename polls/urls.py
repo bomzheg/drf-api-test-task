@@ -2,9 +2,8 @@ from rest_framework.routers import DefaultRouter
 
 from polls import views
 
-app_name = 'polls'
-
 router = DefaultRouter()
+router.register(r'polls/(?P<poll_id>[^/.]+)/questions', views.PollQuestionsView, basename=r'polls/(?P<poll_id>[^/.]+)/questions')
 router.register('polls', views.PollsView)
 router.register('questions', views.QuestionsView)
 router.register('possible_answers', views.PossibleAnswersView)

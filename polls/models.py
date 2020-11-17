@@ -63,14 +63,14 @@ class Question(models.Model):
         return self.question_text
 
 
-class Answer(models.Model):
+class PossibleAnswer(models.Model):
     """Вариант ответа для вопросов с вариантами ответов."""
     answer_text = models.CharField(max_length=256, verbose_name="Текст ответа")
     for_question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
         verbose_name="К вопросу",
-        related_name='answers',
+        related_name='possible_answers',
     )
 
     def __str__(self):

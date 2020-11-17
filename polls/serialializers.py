@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from polls.models import Poll, Question, Answer
+from polls.models import Poll, Question, PossibleAnswer
 
 
 class PollSerializer(serializers.ModelSerializer):
@@ -17,9 +17,9 @@ class QuestionSerializer(serializers.ModelSerializer):
         exclude = tuple()
 
 
-class AnswerSerializer(serializers.ModelSerializer):
+class PossibleAnswerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Answer
+        model = PossibleAnswer
         exclude = tuple()
 
 

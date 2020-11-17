@@ -7,6 +7,6 @@ app_name = 'polls'
 router = DefaultRouter()
 router.register('polls', views.PollsView)
 router.register('questions', views.QuestionsView)
-router.register('answers', views.AnswersView)
+router.register('possible_answers', views.PossibleAnswersView)
 
 urlpatterns = router.urls

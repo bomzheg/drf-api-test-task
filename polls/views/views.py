@@ -4,12 +4,12 @@ from polls.models import Poll
 from polls.serialializers import (
     PollSerializer,
     QuestionSerializer,
-    AnswerSerializer
+    PossibleAnswerSerializer
 )
 from polls.services.polls import (
     get_active_polls,
     get_active_question,
-    get_answers_for_active_question,
+    get_possible_answers_for_active_question,
     get_question_of_poll,
 )
 from polls.views.common import ParentIDMixin
@@ -25,9 +25,9 @@ class QuestionsView(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
 
 
-class AnswersView(viewsets.ModelViewSet):
-    queryset = get_answers_for_active_question()
-    serializer_class = AnswerSerializer
+class PossibleAnswersView(viewsets.ModelViewSet):
+    queryset = get_possible_answers_for_active_question()
+    serializer_class = PossibleAnswerSerializer
 
 
 class PollQuestionsView(viewsets.ModelViewSet, ParentIDMixin):

@@ -4,7 +4,7 @@ from django.urls import path
 from rest_framework.authtoken import views
 
 urlpatterns = [
-    url(r'^api/', include('pools.urls')),
+    url(r'^api/', include('polls.urls')),
     path(r'admin/', admin.site.urls),
     path('api-token-auth/', views.obtain_auth_token),
 ]

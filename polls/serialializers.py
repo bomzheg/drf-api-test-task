@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from pools.models import Poll, Question, Answer
+
+from polls.models import Poll, Question, Answer
 
 
-class PoolSerializer(serializers.ModelSerializer):
+class PollSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
         exclude = tuple()
@@ -19,3 +21,10 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         exclude = tuple()
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'token')

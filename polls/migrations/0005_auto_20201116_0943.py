@@ -2,13 +2,13 @@
 
 import datetime
 from django.db import migrations, models
-import pools.models
+import polls.models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pools', '0004_poll_name'),
+        ('polls', '0004_poll_name'),
     ]
 
     operations = [
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='question_type',
-            field=models.CharField(choices=[(1, 'one_choice'), (2, 'multiple_choice'), (3, 'free_text')], default=pools.models.QuestionTypes(1), max_length=64, verbose_name='Тип ответа на вопрос'),
+            field=models.CharField(choices=[(1, 'one_choice'), (2, 'multiple_choice'), (3, 'free_text')], default=polls.models.QuestionTypes(1), max_length=64, verbose_name='Тип ответа на вопрос'),
         ),
         migrations.AlterField(
             model_name='poll',

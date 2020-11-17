@@ -52,7 +52,12 @@ class Question(models.Model):
         verbose_name="Тип ответа на вопрос",
         max_length=64,
     )
-    from_pool = models.ForeignKey(Poll, on_delete=models.CASCADE, verbose_name="К опросу")
+    from_poll = models.ForeignKey(
+        Poll,
+        on_delete=models.CASCADE,
+        verbose_name="К опросу",
+        related_name='questions',
+    )
 
     def __str__(self):
         return self.question_text
@@ -61,7 +66,12 @@ class Question(models.Model):
 class Answer(models.Model):
     """Вариант ответа для вопросов с вариантами ответов."""
     answer_text = models.CharField(max_length=256, verbose_name="Текст ответа")
-    for_question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="К вопросу")
+    for_question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        verbose_name="К вопросу",
+        related_name='answers',
+    )
 
     def __str__(self):
         return self.answer_text

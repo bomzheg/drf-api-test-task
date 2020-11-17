@@ -1,4 +1,13 @@
-from .views import PollsView, PossibleAnswersView, QuestionsView, PollQuestionsView
+from .views import (
+    PollsView,
+    PossibleAnswersView,
+    QuestionsView,
+    PollQuestionsView,
+    QuestionPossibleAnswersView,
+)
 
 
-__all__ = [PollsView, PossibleAnswersView, QuestionsView, PollQuestionsView]
+__all__ = [
+    PollsView, PossibleAnswersView, QuestionsView, PollQuestionsView,
+    QuestionPossibleAnswersView,
+]

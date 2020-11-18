@@ -40,7 +40,7 @@ class Poll(models.Model):
 
 
 class Question(models.Model):
-    """Модель данных вопроса обязательно связана с конкретным опросом."""
+    """Модель данных вопроса. Обязательно связана с конкретным опросом."""
     question_text = models.CharField(max_length=1024, verbose_name="Текст вопроса")
     question_type = models.CharField(
         choices=QuestionTypes.choices(),

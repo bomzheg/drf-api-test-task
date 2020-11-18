@@ -1,4 +1,6 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 from polls import views
 
@@ -18,3 +20,4 @@ router.register(questions_url, views.QuestionsView)
 router.register(possible_answers_url, views.PossibleAnswersView)
 
 urlpatterns = router.urls
+urlpatterns.append(path('api-token-auth/', obtain_auth_token))

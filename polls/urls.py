@@ -3,18 +3,18 @@ from rest_framework.routers import DefaultRouter
 from polls import views
 
 router = DefaultRouter()
-router.register(
-    r'polls/(?P<poll_id>[^/.]+)/questions/(?P<question_id>[^/.]+)/possible_answers',
-    views.QuestionPossibleAnswersView,
-    basename=r'polls/(?P<poll_id>[^/.]+)/questions/(?P<question_id>[^/.]+)/possible_answers'
-)
-router.register(
-    r'polls/(?P<poll_id>[^/.]+)/questions',
-    views.PollQuestionsView,
-    basename=r'polls/(?P<poll_id>[^/.]+)/questions'
-)
-router.register('polls', views.PollsView)
-router.register('questions', views.QuestionsView)
-router.register('possible_answers', views.PossibleAnswersView)
+
+questions_url = r'questions'
+possible_answers_url = 'possible_answers'
+poll_url = r"polls"
+
+poll_question_url = rf"{poll_url}/(?P<poll_id>[^/.]+)/{questions_url}"
+poll_question_answer_url = rf"{poll_question_url}/(?P<question_id>[^/.]+)/{possible_answers_url}"
+
+router.register(poll_question_answer_url, views.QuestionPossibleAnswersView, basename=poll_question_answer_url)
+router.register(poll_question_url, views.PollQuestionsView, basename=poll_question_url)
+router.register(poll_url, views.PollsView)
+router.register(questions_url, views.QuestionsView)
+router.register(possible_answers_url, views.PossibleAnswersView)
 
 urlpatterns = router.urls

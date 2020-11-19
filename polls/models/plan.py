@@ -30,6 +30,11 @@ class Poll(models.Model):
         max_length=1024, verbose_name="Приветственное сообщение в начале опроса", default="")
     final_text = models.CharField(max_length=1024, verbose_name="Сообщение о завершении опроса", default="")
 
+    class Meta:
+        db_table = "pools"
+        verbose_name = "Опрос"
+        verbose_name_plural = "Опросы"
+
     def __str__(self):
         return self.name
 
@@ -55,6 +60,11 @@ class Question(models.Model):
         related_name='questions',
     )
 
+    class Meta:
+        db_table = "questions"
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"
+
     def __str__(self):
         return self.question_text
 
@@ -68,6 +78,11 @@ class PossibleAnswer(models.Model):
         verbose_name="К вопросу",
         related_name='possible_answers',
     )
+
+    class Meta:
+        db_table = "possible_answers"
+        verbose_name = "Возможный ответ"
+        verbose_name_plural = "Возможные ответы"
 
     def __str__(self):
         return self.answer_text

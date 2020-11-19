@@ -20,5 +20,10 @@ class Answer(models.Model):
     answer_text = models.CharField(max_length=512, verbose_name="Текст ответа")
     datetime_answer = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        db_table = "fact_answers"
+        verbose_name = "Фактический ответ"
+        verbose_name_plural = "Фактические ответы"
+
     def __str__(self):
         return f"{self.for_question} - респондент {self.respondent} ответил {self.answer_text}"

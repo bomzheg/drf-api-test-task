@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from polls.models import Poll, Question, Answer
+from polls.models import Poll, Question, PossibleAnswer
 
 
 def get_active_polls():
@@ -14,9 +14,9 @@ def get_active_question():
     return Question.objects.filter(from_poll__in=get_active_polls())
 
 
-def get_answers_for_active_question():
+def get_possible_answers_for_active_question():
     # noinspection PyUnresolvedReferences
-    return Answer.objects.filter(for_question__in=get_active_question())
+    return PossibleAnswer.objects.filter(for_question__in=get_active_question())
 
 
 def get_question_of_poll(poll_id: int):

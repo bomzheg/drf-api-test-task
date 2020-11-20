@@ -1,11 +1,7 @@
 from datetime import datetime
 from enum import Enum, auto
 
-from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from rest_framework.authtoken.models import Token
 
 
 class QuestionTypes(Enum):
@@ -34,6 +30,11 @@ class Poll(models.Model):
         max_length=1024, verbose_name="Приветственное сообщение в начале опроса", default="")
     final_text = models.CharField(max_length=1024, verbose_name="Сообщение о завершении опроса", default="")
 
+    class Meta:
+        db_table = "pools"
+        verbose_name = "Опрос"
+        verbose_name_plural = "Опросы"
+
     def __str__(self):
         return self.name
 
@@ -44,7 +45,7 @@ class Poll(models.Model):
 
 
 class Question(models.Model):
-    """Модель данных вопроса обязательно связана с конкретным опросом."""
+    """Модель данных вопроса. Обязательно связана с конкретным опросом."""
     question_text = models.CharField(max_length=1024, verbose_name="Текст вопроса")
     question_type = models.CharField(
         choices=QuestionTypes.choices(),
@@ -59,27 +60,29 @@ class Question(models.Model):
         related_name='questions',
     )
 
+    class Meta:
+        db_table = "questions"
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"
+
     def __str__(self):
         return self.question_text
 
 
-class Answer(models.Model):
+class PossibleAnswer(models.Model):
     """Вариант ответа для вопросов с вариантами ответов."""
     answer_text = models.CharField(max_length=256, verbose_name="Текст ответа")
     for_question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
         verbose_name="К вопросу",
-        related_name='answers',
+        related_name='possible_answers',
     )
+
+    class Meta:
+        db_table = "possible_answers"
+        verbose_name = "Возможный ответ"
+        verbose_name_plural = "Возможные ответы"
 
     def __str__(self):
         return self.answer_text
-
-
-# noinspection PyUnusedLocal
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        # noinspection PyUnresolvedReferences
-        Token.objects.create(user=instance)
